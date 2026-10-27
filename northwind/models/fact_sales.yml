@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: >
+      Sales transaction fact table. One row per product
+      line item ordered. Includes quantities, prices,
+      discounts, and sales amounts.
+
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - orderid
+              - productkey
+              
+    columns:
+      - name: orderid
+        description: Original Northwind order identifier
+        data_tests:
+          - not_null
+
+      - name: customerkey
+        description: Foreign key referencing dim_customer
+
+      - name: employeekey
+        description: Foreign key referencing dim_employee
+
+      - name: orderdatekey
+        description: Foreign key referencing dim_date
+
+      - name: productkey
+        description: Foreign key referencing dim_product
+        data_tests:
+          - not_null
+
+      - name: quantity
+        description: Quantity of products ordered
+        data_tests:
+          - not_null
+
+      - name: extendedpriceamount
+        description: Quantity multiplied by unit price
+        data_tests:
+          - not_null
+
+      - name: discountamount
+        description: Extended price multiplied by discount rate
+        data_tests:
+          - not_null
+
+      - name: soldamount
+        description: Extended price minus discount amount
+        data_tests:
+          - not_null
