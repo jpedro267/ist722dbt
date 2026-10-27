@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: obt_sales
+    description: >
+      Sales One Big Table combining fact_sales with
+      customer, employee, date, and product dimensions.
+      Contains one row per product line item ordered
+      and includes sales amounts.
